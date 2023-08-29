@@ -29,10 +29,17 @@ function addInLocal(e){
     deleteBtn.className = 'delete-button delete';
     deleteBtn.appendChild(document.createTextNode('Delete'));
     deleteBtn.setAttribute('data-name', myData.name);
-    deleteBtn.addEventListener('click', removeItem); // Add this line
+    deleteBtn.addEventListener('click', removeItem); 
+
+    let editBtn = document.createElement('button');
+    editBtn.className = 'edit-button edit';
+    editBtn.appendChild(document.createTextNode('Edit'));
+    editBtn.setAttribute('data-name', myData.name);
+    editBtn.addEventListener('click', editItem);
 
     newList.appendChild(textNode);
     newList.appendChild(deleteBtn);
+    newList.appendChild(editBtn);
     itemList.appendChild(newList); 
     
 }
@@ -49,3 +56,16 @@ function removeItem(e){
       }
     }
   }
+
+  // Edit item
+function editItem(e) {
+    let name = e.target.getAttribute('data-name');
+    let data = JSON.parse(localStorage.getItem(name));
+    nameInput.value = data.name;
+    emailInput.value = data.email;
+    phoneInput.value = data.phone;
+
+    localStorage.removeItem(name);
+    let li = e.target.parentElement;
+    itemList.removeChild(li);
+}
