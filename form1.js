@@ -8,14 +8,12 @@ form.addEventListener('submit',addInLocal);
 
 function addInLocal(e){
     e.preventDefault();
-    let name = nameInput.value;
-    let email = emailInput.value;
-
-    console.log(name);
-    console.log(email);
-
-    localStorage.setItem('userName', name);
-    localStorage.setItem('userEmail', email);
-
+    
+    let myData = {
+        name : nameInput.value,
+        email : emailInput.value
+    };
+    let myData_serialized = JSON.stringify(myData);
+    localStorage.setItem(myData.name , myData_serialized );
     
 }
